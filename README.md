@@ -71,7 +71,7 @@ Complete the login. Exit with `Ctrl+C` when done.
 
 ```bash
 cat > /tmp/s.sh << 'EOF'
-tmux kill-server 2>/dev/null; sleep 0.5
+tmux kill-session -t agents 2>/dev/null; sleep 0.5
 tmux new-session -d -s agents
 tmux set -g mouse on
 tmux set -g pane-border-status top

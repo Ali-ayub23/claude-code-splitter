@@ -619,7 +619,8 @@ fi
             // 5. Setup Pane 1
             const data1 = getAgentData(1);
             shellCmds.push(`tmux select-pane -t 0 -T "${data1.name}"`);
-            shellCmds.push(`tmux send-keys -t 0 '${escapeHost(getPaneCmd(data1))}' C-m`);
+            shellCmds.push(`tmux send-keys -t 0 '${escapeHost(getPaneCmd(data1))}'`);
+            shellCmds.push(`tmux send-keys -t 0 Enter`);
 
             if (count > 1) {
                 const cols = Math.min(count, 3);
@@ -629,7 +630,8 @@ fi
                     const data = getAgentData(c + 1);
                     shellCmds.push(`tmux split-window -h`);
                     shellCmds.push(`tmux select-pane -T "${data.name}"`);
-                    shellCmds.push(`tmux send-keys '${escapeHost(getPaneCmd(data))}' C-m`);
+                    shellCmds.push(`tmux send-keys '${escapeHost(getPaneCmd(data))}'`);
+                    shellCmds.push(`tmux send-keys Enter`);
                 }
 
                 // Create rows
@@ -637,7 +639,8 @@ fi
                     const data = getAgentData(i);
                     shellCmds.push(`tmux split-window -v`);
                     shellCmds.push(`tmux select-pane -T "${data.name}"`);
-                    shellCmds.push(`tmux send-keys '${escapeHost(getPaneCmd(data))}' C-m`);
+                    shellCmds.push(`tmux send-keys '${escapeHost(getPaneCmd(data))}'`);
+                    shellCmds.push(`tmux send-keys Enter`);
                 }
 
                 shellCmds.push(`tmux select-layout tiled`);

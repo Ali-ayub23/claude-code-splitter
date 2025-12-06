@@ -568,8 +568,8 @@
             let shellCmds = [];
 
             // 1. Dependency Checks (Robustness)
+            // 1. Dependency Checks (Robustness)
             const depCheck = `
-set -e;
 export PATH="$HOME/.local/bin:/usr/local/bin:$PATH";
 if ! command -v curl &> /dev/null; then echo "Error: curl missing."; exit 1; fi;
 if ! command -v tmux &> /dev/null; then
@@ -586,8 +586,8 @@ fi
 
             shellCmds.push(depCheck);
 
-            // 2. Kill existing
-            shellCmds.push(`tmux kill-session -t agents 2>/dev/null`);
+            // 2. Kill existing (safely)
+            shellCmds.push(`tmux kill-session -t agents 2>/dev/null || true`);
 
             // 3. Start new session (detached)
             shellCmds.push(`tmux new-session -d -s agents`);

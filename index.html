@@ -189,6 +189,12 @@
             background: #27C93F;
         }
 
+        .copy-btn.copied {
+            background: #2ecc71;
+            color: white;
+            border-color: #2ecc71;
+        }
+
         .grid-container {
             max-height: 600px;
             overflow-y: auto;
@@ -644,19 +650,8 @@ fi
         }
 
         function copyCmd(elementId) {
-            const text = document.getElementById(elementId).textContent;
-
-            // Try modern API first
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showCopyFeedback(elementId);
-                }).catch(err => {
-                    console.error('Clipboard API failed:', err);
-                    fallbackCopy(text, elementId);
-                });
-            } else {
-                fallbackCopy(text, elementId);
-            }
+            fallbackCopy(text, elementId);
+        }
         }
 
         function fallbackCopy(text, elementId) {

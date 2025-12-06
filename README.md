@@ -34,6 +34,16 @@ claude
 bash <(curl -s https://raw.githubusercontent.com/theaustinhatfield/claude-code-splitter/main/launch.sh?v=3)
 ```
 
+## Advanced Usage
+
+Want more power? You can customize the number of agents by setting the `AGENT_COUNT` environment variable before running the script.
+
+**Example: Launch 8 Agents**
+```bash
+export AGENT_COUNT=8
+bash <(curl -s https://raw.githubusercontent.com/theaustinhatfield/claude-code-splitter/main/launch.sh?v=3)
+```
+
 ## Overview
 
 We use `tmux` to run 4 independent Claude sessions in parallel.

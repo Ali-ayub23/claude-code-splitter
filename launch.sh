@@ -45,7 +45,8 @@ fi
 
 # Configuration
 SESSION="claude_grid"
-AGENT_COUNT=4
+# Allow AGENT_COUNT to be overridden by environment variable, default to 4
+AGENT_COUNT=${AGENT_COUNT:-4}
 
 # Check if session exists
 if tmux has-session -t $SESSION 2>/dev/null; then

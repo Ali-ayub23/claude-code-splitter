@@ -339,7 +339,7 @@
                     style="font-size: 12px; font-weight: 600; color: var(--claude-subtext); text-transform: uppercase; margin-bottom: 8px;">
                     Step 1: Install Claude Code</div>
                 <div class="command-box">
-                    <div class="command-text" id="installCmd">npm install -g @anthropic-ai/claude-code</div>
+                    <div class="command-text" id="installCmd">curl -fsSL https://claude.ai/install.sh | bash</div>
                     <button class="copy-btn" onclick="copyCmd('installCmd')">Copy</button>
                 </div>
             </div>
@@ -558,8 +558,8 @@ if ! command -v tmux &> /dev/null; then
   else echo "Error: tmux not found."; exit 1; fi
 fi;
 if ! command -v claude &> /dev/null; then
-  if command -v npm &> /dev/null; then npm install -g @anthropic-ai/claude-code;
-  else echo "Error: npm not found."; exit 1; fi
+  echo "Claude Code not found. Installing..."
+  curl -fsSL https://claude.ai/install.sh | bash
 fi
 `.replace(/\n/g, ' ').trim(); // Minify into one line
 

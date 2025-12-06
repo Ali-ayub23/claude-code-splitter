@@ -20,7 +20,7 @@ Claude Code is brilliant, but single-threaded. **Claude Code Splitter** transfor
 
 **Step 1: Install Claude Code**
 ```bash
-npm i -g @anthropic-ai/claude-code
+curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 **Step 2: Launch the Grid**

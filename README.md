@@ -1,10 +1,14 @@
 # Claude Code Splitter
 
-<p align="center">
-  <a href="https://github.com/theaustinhatfield/claude-code-splitter">
-    <img src="https://img.shields.io/github/stars/theaustinhatfield/claude-code-splitter?style=for-the-badge&logo=github&label=Star%20This%20Repo" alt="Star this repo">
-  </a>
-</p>
+```text
+  ____  _                  _   _     _                               
+ / ___|| |_ __ _ _ __     | |_| |__ (_)___    _ __ ___ _ __   ___  
+ \___ \| __/ _` | '__|    | __| '_ \| / __|  | '__/ _ \ '_ \ / _ \ 
+  ___) | || (_| | |       | |_| | | | \__ \  | | |  __/ |_) | (_) |
+ |____/ \__\__,_|_|        \__|_| |_|_|___/  |_|  \___| .__/ \___/ 
+                                                      |_|          
+```
+> If you're enjoying this, please star this repo!
 
 ## Like 4x Coding Velocity.
 

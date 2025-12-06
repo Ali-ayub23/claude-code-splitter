@@ -1,9 +1,24 @@
 #!/bin/bash
 
+# Ensure robust error handling
+set -e
+
+# Add common binary paths to ensure tools are found
+export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
+
+# Check for curl (required for installation)
+if ! command -v curl &> /dev/null; then
+    echo "Error: curl is required but not found. Please install curl."
+    exit 1
+fi
+
 # Check for Claude Code
 if ! command -v claude &> /dev/null; then
     echo "Claude Code not found. Installing..."
     curl -fsSL https://claude.ai/install.sh | bash
+    
+    # Refresh hash to find the new binary
+    hash -r 2>/dev/null || true
 fi
 
 # Verify installation

@@ -563,14 +563,18 @@
 
             // 1. Dependency Checks (Robustness)
             const depCheck = `
+set -e;
+export PATH="$HOME/.local/bin:/usr/local/bin:$PATH";
+if ! command -v curl &> /dev/null; then echo "Error: curl missing."; exit 1; fi;
 if ! command -v tmux &> /dev/null; then
   if command -v brew &> /dev/null; then brew install tmux;
   elif command -v apt-get &> /dev/null; then sudo apt-get update && sudo apt-get install -y tmux;
   else echo "Error: tmux not found."; exit 1; fi
 fi;
 if ! command -v claude &> /dev/null; then
-  echo "Claude Code not found. Installing..."
-  curl -fsSL https://claude.ai/install.sh | bash
+  echo "Claude Code not found. Installing...";
+  curl -fsSL https://claude.ai/install.sh | bash;
+  hash -r 2>/dev/null || true;
 fi
 `.replace(/\n/g, ' ').trim(); // Minify into one line
 

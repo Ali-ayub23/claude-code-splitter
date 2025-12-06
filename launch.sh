@@ -1,4 +1,24 @@
 #!/bin/bash
+
+# Check for Claude Code
+if ! command -v claude &> /dev/null; then
+    echo "Claude Code not found. Installing..."
+    if command -v npm &> /dev/null; then
+        npm install -g @anthropic-ai/claude-code
+    else
+        echo "Error: npm is not installed. Please install Node.js and npm to continue."
+        exit 1
+    fi
+fi
+
+# Verify installation
+if ! command -v claude &> /dev/null; then
+    echo "Error: Failed to install Claude Code. Please install manually: npm i -g @anthropic-ai/claude-code"
+    exit 1
+fi
+
+echo "Claude Code is ready."
+
 # Test script to verify tmux logic for 7 agents
 
 SESSION="test_agents"

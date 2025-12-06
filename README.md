@@ -16,7 +16,9 @@
   </a>
 </p>
 
-## Run 4 Claude Code agents in parallel.
+## Claude Code Splitter
+
+### Run 4 Claude Code agents in parallel.
 
 ```
 +---------------------------+---------------------------+

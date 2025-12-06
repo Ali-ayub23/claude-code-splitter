@@ -18,13 +18,15 @@ Claude Code is brilliant, but single-threaded. **Claude Code Splitter** transfor
 
 ## Get Started
 
-**Run this single command:**
-
+**Step 1: Install Claude Code**
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/theaustinhatfield/claude-code-splitter/main/launch.sh?v=1)
+npm i -g @anthropic-ai/claude-code
 ```
 
-(This script will automatically install `claude-code` if you don't have it).
+**Step 2: Launch the Grid**
+```bash
+bash <(curl -s https://raw.githubusercontent.com/theaustinhatfield/claude-code-splitter/main/launch.sh?v=2)
+```
 
 ## Overview
 

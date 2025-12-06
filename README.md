@@ -1,61 +1,49 @@
-# 🔀 Claude Code Splitter
+# Claude Code Splitter
 
-<p align="center">
-  <strong>Run 4 Claude Code AI agents in parallel. Multiply your productivity.</strong>
-</p>
-
-<p align="center">
-  <a href="#quick-start">Quick Start</a> •
-  <a href="#how-it-works">How It Works</a> •
-  <a href="#controls">Controls</a> •
-  <a href="#faq">FAQ</a> •
-  <a href="#troubleshooting">Troubleshooting</a>
-</p>
-
----
+**Run 4 Claude Code agents in parallel.**
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                     CLAUDE CODE SPLITTER                        │
-├────────────────────────────┬────────────────────────────────────┤
-│                            │                                    │
-│         Agent-1            │            Agent-2                 │
-│                            │                                    │
-│    "Fix the login bug"     │    "Add unit tests"                │
-│                            │                                    │
-├────────────────────────────┼────────────────────────────────────┤
-│                            │                                    │
-│         Agent-3            │            Agent-4                 │
-│                            │                                    │
-│    "Refactor database"     │    "Update docs"                   │
-│                            │                                    │
-└────────────────────────────┴────────────────────────────────────┘
-                    🖱️ Click any pane to select
++---------------------------+---------------------------+
+|                           |                           |
+|         Agent-1           |         Agent-2           |
+|                           |                           |
+|   "Fix the login bug"     |   "Add unit tests"        |
+|                           |                           |
++---------------------------+---------------------------+
+|                           |                           |
+|         Agent-3           |         Agent-4           |
+|                           |                           |
+|   "Refactor database"     |   "Update docs"           |
+|                           |                           |
++---------------------------+---------------------------+
+              Click any pane to select
 ```
 
 ---
 
-## ✨ Features
+## The Problem
 
-- **4 parallel agents** - Work on 4 different tasks simultaneously
-- **Mouse support** - Click to select any agent
-- **Labeled panes** - Each agent shows its name in the border
-- **Persistent sessions** - Detach and reattach anytime
-- **Zero config** - Just copy, paste, and code
+Claude Code is powerful, but it's single-threaded. You talk to one agent at a time. When you're working on a complex project, that becomes a bottleneck. You wait for one task to finish before starting another.
+
+## The Solution
+
+This tool splits your terminal into four independent Claude Code sessions. Each runs in parallel. You can work on the frontend in Agent-1 while Agent-2 writes tests, Agent-3 refactors the database, and Agent-4 updates documentation.
+
+The result: 4x throughput. Same human, same API key, four times the work getting done.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
-### Step 1: Install Claude Code (one-time)
+### Step 1: Install Claude Code
 
 ```bash
 npm i -g @anthropic-ai/claude-code && claude
 ```
 
-Complete the login process, then exit with `Ctrl+C`.
+Complete the login. Exit with `Ctrl+C` when done.
 
-### Step 2: Launch 4 Agents
+### Step 2: Launch Four Agents
 
 ```bash
 cat > /tmp/s.sh << 'EOF'
@@ -73,58 +61,56 @@ EOF
 bash /tmp/s.sh
 ```
 
-**That's it!** You now have 4 Claude Code agents ready to work.
+That's it. Four agents, ready to work.
 
 ---
 
-## 🔧 How It Works
+## How It Works
+
+The script uses tmux to create a 2x2 grid of terminal panes. Each pane runs an independent Claude Code session. They share your authentication but otherwise operate independently.
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│                         Your Terminal                            │
-│  ┌─────────────────────────────────────────────────────────────┐ │
-│  │                        tmux                                 │ │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────┐ │ │
-│  │  │  Claude     │  │  Claude     │  │  Claude     │  │ ... │ │ │
-│  │  │  Code CLI   │  │  Code CLI   │  │  Code CLI   │  │     │ │ │
-│  │  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──┬──┘ │ │
-│  └─────────┼────────────────┼────────────────┼────────────┼────┘ │
-└────────────┼────────────────┼────────────────┼────────────┼──────┘
-             │                │                │            │
-             ▼                ▼                ▼            ▼
-       ┌─────────────────────────────────────────────────────────┐
-       │               Anthropic API (Cloud)                     │
-       │                    Claude AI                            │
-       └─────────────────────────────────────────────────────────┘
++----------------------------------------------------------------+
+|                         Your Terminal                           |
+|  +------------------------------------------------------------+ |
+|  |                        tmux                                | |
+|  |  +-----------+  +-----------+  +-----------+  +-----------+| |
+|  |  | Claude    |  | Claude    |  | Claude    |  | Claude    || |
+|  |  | Code CLI  |  | Code CLI  |  | Code CLI  |  | Code CLI  || |
+|  |  +-----+-----+  +-----+-----+  +-----+-----+  +-----+-----+| |
+|  +--------|--------------|--------------|--------------+------+ |
++-----------|--------------|--------------|--------------|--------+
+            |              |              |              |
+            v              v              v              v
+      +-----------------------------------------------------+
+      |               Anthropic API (Cloud)                 |
+      +-----------------------------------------------------+
 ```
 
-**Components:**
-
-| Component | Description |
-|-----------|-------------|
-| **tmux** | Terminal multiplexer that creates the 2×2 grid |
-| **Claude Code** | Anthropic's official AI coding assistant CLI |
-| **Anthropic API** | Cloud AI that powers the responses |
+| Component | Purpose |
+|-----------|---------|
+| tmux | Terminal multiplexer. Creates the grid. |
+| Claude Code | Anthropic's coding assistant CLI. |
+| Anthropic API | The AI backend. Runs in the cloud. |
 
 ---
 
-## 🎮 Controls
+## Controls
 
 | Action | Keys |
 |--------|------|
-| **Select pane** | 🖱️ Click |
-| **Navigate** | `Ctrl+B` then `↑` `↓` `←` `→` |
-| **Fullscreen toggle** | `Ctrl+B` then `z` |
-| **Detach (keep running)** | `Ctrl+B` then `D` |
-| **Reattach** | `tmux attach -t agents` |
-| **Kill all** | `tmux kill-session -t agents` |
-| **List sessions** | `tmux ls` |
+| Select pane | Click with mouse |
+| Navigate | `Ctrl+B` then arrow keys |
+| Fullscreen | `Ctrl+B` then `z` |
+| Detach | `Ctrl+B` then `D` |
+| Reattach | `tmux attach -t agents` |
+| Kill all | `tmux kill-session -t agents` |
 
 ---
 
-## 💡 Use Cases
+## Use Cases
 
-### Parallel Development
+**Parallel development:**
 ```
 Agent-1: "Fix the authentication bug in login.py"
 Agent-2: "Add unit tests for the user model"
@@ -132,13 +118,13 @@ Agent-3: "Refactor the database queries"
 Agent-4: "Update the API documentation"
 ```
 
-### Research + Implementation
+**Research and implementation:**
 ```
-Agent-1: "Research best practices for caching in Python"
-Agent-2: *implementing the cache based on Agent-1's findings*
+Agent-1: "Research caching best practices"
+Agent-2: [implementing based on Agent-1's findings]
 ```
 
-### Multi-Repository
+**Multi-repository:**
 ```
 Agent-1: Working in /frontend
 Agent-2: Working in /backend
@@ -148,143 +134,95 @@ Agent-4: Working in /infrastructure
 
 ---
 
-## ❓ FAQ
+## FAQ
 
-### Do I need to be online?
-**Yes.** Claude Code uses the Anthropic API in the cloud. All responses come from Anthropic's servers.
+**Do I need to be online?**
 
-### Can all 4 agents work simultaneously?
-**Yes!** Each agent is independent. You can have 4 different conversations/tasks running at the same time.
+Yes. Claude Code calls the Anthropic API. The intelligence lives in the cloud.
 
-### Do I need 4 API keys?
-**No.** All 4 agents share your single Claude/Anthropic login.
+**Can all four agents work at once?**
 
-### Can I have more than 4 agents?
-Yes! Modify the script to add more `split-window` commands. However, screen space becomes limited.
+Yes. They're independent processes. Four conversations running simultaneously.
 
-### Does it work on Mac/Linux/Windows?
-- **Mac**: ✅ Install tmux with `brew install tmux`
-- **Linux**: ✅ Install tmux with `apt install tmux`
-- **Windows**: ✅ Use WSL or Git Bash
+**Do I need four API keys?**
 
-### How do I switch repos per agent?
-Click on a pane, then tell Claude:
-```
-Switch to working in /path/to/other/repo
-```
+No. One login, four agents.
 
-Or exit (`Ctrl+C`), `cd /new/repo`, then `claude`.
+**Can I use more than four?**
+
+Yes, but screen space becomes the limiting factor. Four fits well on most displays.
+
+**Platform support?**
+
+Works on Mac, Linux, and Windows (via WSL). You need tmux installed.
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
-### "tmux: command not found"
+**"tmux: command not found"**
 
-Install tmux:
+Install it:
 ```bash
 # Mac
 brew install tmux
 
 # Ubuntu/Debian
-sudo apt-get update && sudo apt-get install -y tmux
+sudo apt-get install tmux
 
 # Fedora
 sudo dnf install tmux
 ```
 
-### "duplicate session: agents"
+**"duplicate session: agents"**
 
-Session already exists. Either attach to it or kill it:
+The session already exists:
 ```bash
-# Attach to existing
 tmux attach -t agents
-
-# Or kill and restart
+# or
 tmux kill-session -t agents
 ```
 
-### "claude: command not found"
+**"claude: command not found"**
 
-Claude Code isn't installed. Run Step 1:
+Run Step 1 again:
 ```bash
 npm i -g @anthropic-ai/claude-code && claude
 ```
 
-### "server exited unexpectedly"
+**"server exited unexpectedly"**
 
-tmux server crashed. Just run the command again:
+Just run the script again:
 ```bash
 bash /tmp/s.sh
 ```
 
-If `/tmp/s.sh` is gone (system reboot), paste Step 2 again.
-
-### Agents are using wrong API key
-
-Claude Code stores credentials in `~/.claude/`. All terminal sessions share this. To reset:
-```bash
-rm -rf ~/.claude
-claude  # Re-login
-```
-
-### Mouse clicking doesn't work
-
-Make sure mouse is enabled. Inside tmux:
-```bash
-tmux set -g mouse on
-```
-
 ---
 
-## 📋 Quick Reference
+## Quick Reference
 
 ```bash
 # Install (once)
 npm i -g @anthropic-ai/claude-code && claude
 
-# Launch 4 agents
+# Launch
 bash /tmp/s.sh
 
-# Reattach to session
+# Reattach
 tmux attach -t agents
 
-# Kill all agents
+# Kill
 tmux kill-server
-
-# Check running sessions
-tmux ls
 ```
 
 ---
 
-## 🤝 Contributing
+## License
 
-Contributions welcome! Feel free to:
-- Open issues for bugs or feature requests
-- Submit PRs for improvements
-- Share your use cases
+MIT
 
 ---
 
-## 📄 License
+## Contributing
 
-MIT License - Use it however you like!
-
----
-
-## ⭐ Star This Repo!
-
-If this tool saves you time, please star the repo! It helps others discover it.
-
-<p align="center">
-  <a href="https://github.com/theaustinhatfield/claude-code-splitter">
-    <img src="https://img.shields.io/github/stars/theaustinhatfield/claude-code-splitter?style=social" alt="GitHub stars">
-  </a>
-</p>
-
----
-
-<p align="center">
-  Made with ☕ for the Claude Code community
-</p>
+Issues and pull requests welcome.

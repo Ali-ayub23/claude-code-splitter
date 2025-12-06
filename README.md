@@ -14,7 +14,7 @@
   </a>
 </p>
 
-**Run 4 Claude Code agents in parallel.**
+## Run 4 Claude Code agents in parallel.
 
 ```
 +---------------------------+---------------------------+

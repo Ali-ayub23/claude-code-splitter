@@ -19,6 +19,19 @@ fi
 
 echo "Claude Code is ready."
 
+# Check for tmux
+if ! command -v tmux &> /dev/null; then
+    echo "tmux not found. Installing..."
+    if command -v brew &> /dev/null; then
+        brew install tmux
+    elif command -v apt-get &> /dev/null; then
+        sudo apt-get update && sudo apt-get install -y tmux
+    else
+        echo "Error: tmux is not installed and could not be installed automatically. Please install tmux."
+        exit 1
+    fi
+fi
+
 
 # Configuration
 SESSION="claude_grid"

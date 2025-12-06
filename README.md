@@ -21,7 +21,7 @@ Claude Code is brilliant, but single-threaded. **Claude Code Splitter** transfor
 **Run this single command:**
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/theaustinhatfield/claude-code-splitter/main/launch.sh)
+bash <(curl -s https://raw.githubusercontent.com/theaustinhatfield/claude-code-splitter/main/launch.sh?v=1)
 ```
 
 (This script will automatically install `claude-code` if you don't have it).

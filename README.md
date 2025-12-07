@@ -61,13 +61,21 @@ The result: **4x throughput**. Same human, same **Anthropic API** key, four time
 
 ## Quick Start
 
-### Step 1: Install Claude Code
+### Step 1: Prepare Environment
 
-```bash
-npm i -g @anthropic-ai/claude-code && claude
-```
+1. **Install Claude Code:**
+   ```bash
+   npm i -g @anthropic-ai/claude-code
+   ```
 
-Complete the login. Exit with `Ctrl+C` when done.
+2. **Verify everything works:**
+   ```bash
+   claude --version && tmux -V
+   ```
+   *You should see version numbers for both. If `tmux` is missing, install it.*
+
+3. **Login:**
+   Run `claude`, complete the login flow, then press `Ctrl+C` to exit.
 
 ### Step 2: Launch Four Agents
 
@@ -131,6 +139,26 @@ The script uses tmux to create a 2x2 grid of terminal panes. Each pane runs an i
 | Detach | `Ctrl+B` then `D` |
 | Reattach | `tmux attach -t agents` |
 | Kill all | `tmux kill-session -t agents` |
+
+---
+
+## Advanced: Customizing Agent Count
+
+The default script creates 4 agents in a 2x2 grid. You can modify the script to add more agents by adding more `tmux split-window` commands.
+
+**To add a 5th agent:**
+Add this line before the final `tmux attach` command in the script:
+
+```bash
+tmux split-window -v; tmux send-keys 'claude' C-m; tmux select-pane -T "Agent-5"
+```
+
+**Understanding the commands:**
+- `tmux split-window -h`: Splits the current pane horizontally (side-by-side).
+- `tmux split-window -v`: Splits the current pane vertically (top-bottom).
+- `tmux select-pane -t 0`: Selects the first pane (useful for balancing the grid).
+
+*Note: As you add more agents, screen real estate decreases. 4 agents is the sweet spot for most 1080p/1440p monitors.*
 
 ---
 
